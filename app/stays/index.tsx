@@ -5,15 +5,24 @@ import Line from "@/component/Line";
 import StaysList from "@/component/StaysList";
 import stays from "@/data/stays";
 
-const StayIndex = () => {
+// This component will be accessible at /stays
+export default function StaysIndex() {
+  // State to manage the search input
   const [search, setSearch] = useState("");
+  
+  // Filter stays based on search query (case-insensitive)
   const displayStays = stays.filter((stay) =>
     stay.name.toLowerCase().includes(search.toLowerCase())
   );
+  
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Explore Stays</Text>
+      
+      {/* Searchbar component that updates the search state */}
       <Searchbar setSearch={setSearch} />
+      
+      {/* Decorative lines */}
       <View
         style={{
           flexDirection: "row",
@@ -26,12 +35,11 @@ const StayIndex = () => {
         <Line width={"50%"} color="#1abc9c" />
       </View>
 
+      {/* Render the list of stays */}
       <StaysList stays={displayStays} />
     </View>
   );
-};
-
-export default StayIndex;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -43,22 +51,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 10,
-  },
-
-  line: {
-    borderWidth: 1,
-    borderColor: "white",
-    borderRadius: 10,
-    alignItems: "center",
-    backgroundColor: "white",
-    width: "90%",
-    height: 10,
-    marginTop: 20,
-  },
-  textContainer: {
-    padding: 20,
-    borderRadius: 10,
-    alignItems: "center",
-    backgroundColor: "white",
   },
 });

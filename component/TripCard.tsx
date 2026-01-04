@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Link } from "expo-router";  // ADD THIS IMPORT
 
 interface TripCardProps {
   trip: {
@@ -17,9 +18,14 @@ interface TripCardProps {
 
 const TripCard = ({ trip }: TripCardProps) => {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: trip.img }} style={styles.image} />
-    </View>
+    // Link component wraps the View to make it clickable
+    // href prop specifies the destination route
+    // asChild prop tells Link to use the child component as the clickable element
+    <Link href={`/trips/${trip.slug}` as any} asChild>
+      <View style={styles.container}>
+        <Image source={{ uri: trip.img }} style={styles.image} />
+      </View>
+    </Link>
   );
 };
 
